@@ -403,22 +403,81 @@
     .experience-card .role { margin-bottom: 16px; color: var(--cyan); font-weight: 600; }
     .experience-card p:last-child { margin-bottom: 0; color: var(--muted); }
     .experience-location { color: #91a1b9; font-size: .88rem; white-space: nowrap; }
-    .contact-panel {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      padding: clamp(26px, 5vw, 50px);
-      border: 1px solid rgba(114, 170, 255, .24);
-      border-radius: 18px;
-      background:
-        radial-gradient(ellipse at 88% 8%, rgba(47, 112, 196, .22), transparent 55%),
-        linear-gradient(130deg, #101b2e, #0e1727);
+    .contact-section { position: relative; isolation: isolate; overflow: hidden; background: #080d18; }
+    .contact-section .container { position: relative; z-index: 1; }
+    .contact-section .section-heading { max-width: 760px; margin-inline: auto; text-align: center; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; align-items: center; }
+    .contact-form {
+      display: grid;
+      gap: 16px;
+      padding: clamp(22px, 3vw, 30px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15, 23, 39, .9);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
     }
-    .contact-panel h2 { margin-bottom: 10px; font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.05em; }
-    .contact-panel p { max-width: 520px; margin-bottom: 0; color: var(--muted); }
-    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0; }
-    .contact-note { flex-basis: 100%; margin: 0; color: #8292aa; font-size: .76rem; text-align: right; }
+    .contact-form h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 4px; font-size: 1rem; }
+    .contact-form h3 span { color: #58a6ff; font-size: 1.3rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(157, 176, 208, .38);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .035);
+      color: var(--text);
+      font: inherit;
+      font-size: .9rem;
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #9aa7ba; }
+    .contact-form textarea { min-height: 112px; resize: vertical; }
+    .contact-form .button { width: 100%; border: 0; cursor: pointer; }
+    .contact-form .button svg { width: 16px; height: 16px; }
+    .contact-status { min-height: 1.4em; margin: -6px 0 0; color: #9aa9c1; font-size: .8rem; }
+    .contact-connect { display: grid; gap: 12px; }
+    .contact-bot { display: grid; justify-items: center; gap: 18px; margin-bottom: 8px; text-align: center; }
+    .bot-orb {
+      display: grid;
+      width: 112px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(113, 140, 255, .56);
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(36, 62, 126, .45), rgba(91, 46, 122, .4));
+      box-shadow: 0 0 34px rgba(91, 111, 255, .16);
+      font-size: 3.4rem;
+    }
+    .contact-bot p { margin: 0; color: #d4dbea; font-size: .95rem; }
+    .contact-connect h3 { margin: 0 0 4px; text-align: center; font-size: 1.15rem; }
+    .contact-link {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(13, 21, 36, .78);
+      color: #dce5f5;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .contact-link:hover { transform: translateY(-2px); border-color: rgba(114, 170, 255, .56); }
+    .contact-link-icon {
+      display: grid;
+      width: 34px;
+      min-width: 34px;
+      aspect-ratio: 1;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #477fe4, #d754b8);
+      color: white;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+    .contact-link.email .contact-link-icon { background: linear-gradient(135deg, #ff587c, #d749aa); }
+    .contact-link.linkedin .contact-link-icon { background: #0a66c2; }
+    .contact-link.github .contact-link-icon { background: #596579; }
     .text-link { display: inline-flex; align-items: center; gap: 8px; color: #b9d5ff; font-size: .9rem; text-decoration: none; }
     .text-link:hover { color: var(--cyan); }
     .site-footer { padding: 28px 0; border-top: 1px solid rgba(151, 177, 222, .1); color: #77869e; font-size: .82rem; }
@@ -432,7 +491,7 @@
       .about-highlights { grid-template-columns: 1fr; gap: 12px; }
       .skills-grid, .project-grid { grid-template-columns: repeat(2, 1fr); }
       .project-card:last-child { grid-column: 1 / -1; }
-      .contact-panel { align-items: flex-start; flex-direction: column; }
+      .contact-layout { grid-template-columns: 1fr; gap: 32px; }
     }
     @media (max-width: 620px) {
       .container { width: min(var(--content), calc(100% - 36px)); }
@@ -462,7 +521,6 @@
       .project-card:last-child { grid-column: auto; }
       .experience-card { grid-template-columns: 1fr; gap: 5px; padding: 25px; }
       .experience-location { grid-row: 1; }
-      .contact-note { text-align: left; }
       .footer-inner { flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -695,19 +753,48 @@
       </div>
     </section>
 
-    <section class="section" id="contact" aria-labelledby="contact-title">
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <canvas class="section-network" id="contact-network" aria-hidden="true"></canvas>
       <div class="container">
-        <div class="contact-panel">
-          <div>
-            <p class="eyebrow">Get in touch</p>
-            <h2 id="contact-title">Let’s connect.</h2>
-            <p>Interested in AI/ML, have an opportunity to share, or just want to say hello? I’d be glad to hear from you.</p>
-          </div>
-          <div class="contact-actions">
-            <a class="button primary" href="mailto:nihal@example.com">Email me</a>
-            <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a class="button" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <p class="contact-note">Before publishing, replace the example email and profile links with your real details.</p>
+        <div class="section-heading">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Let’s build something together.</h2>
+          <p>Ready to collaborate on the next big AI innovation? Let’s build something amazing together.</p>
+        </div>
+        <div class="contact-layout">
+          <form class="contact-form" id="contact-form">
+            <h3><span aria-hidden="true">▱</span>Send a Message</h3>
+            <input type="text" name="name" placeholder="Your Name" autocomplete="name" aria-label="Your name" required>
+            <input type="email" name="email" placeholder="Your Email" autocomplete="email" aria-label="Your email" required>
+            <textarea name="message" placeholder="Your Message" aria-label="Your message" required></textarea>
+            <button class="button primary" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 3-7.2 18-3.8-7-7-3.8L21 3Zm0 0L10 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Launch Message
+            </button>
+            <p class="contact-status" id="contact-status" aria-live="polite">This opens your email app with the message ready to send.</p>
+          </form>
+          <div class="contact-connect">
+            <div class="contact-bot">
+              <div class="bot-orb" aria-hidden="true">🤖</div>
+              <p>“Ready to process your ideas into reality!”</p>
+            </div>
+            <h3>Connect With Me</h3>
+            <a class="contact-link email" href="mailto:nihalsahad02@gmail.com">
+              <span class="contact-link-icon" aria-hidden="true">✉</span>
+              <span>nihalsahad02@gmail.com</span>
+            </a>
+            <a class="contact-link phone" href="tel:9746277949">
+              <span class="contact-link-icon" aria-hidden="true">☎</span>
+              <span>9746277949</span>
+            </a>
+            <a class="contact-link github" href="https://github.com/Nihalsahad" target="_blank" rel="noopener noreferrer">
+              <span class="contact-link-icon" aria-hidden="true">GH</span>
+              <span>GitHub Profile</span>
+            </a>
+            <a class="contact-link linkedin" href="https://www.linkedin.com/in/nihal-s-s-704b162bb/" target="_blank" rel="noopener noreferrer">
+              <span class="contact-link-icon" aria-hidden="true">in</span>
+              <span>LinkedIn Profile</span>
+            </a>
           </div>
         </div>
       </div>
@@ -746,6 +833,20 @@
     });
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    const contactForm = document.getElementById("contact-form");
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const name = formData.get("name").toString().trim();
+      const senderEmail = formData.get("email").toString().trim();
+      const message = formData.get("message").toString().trim();
+      const subject = `Portfolio message from ${name}`;
+      const body = `${message}\n\nFrom: ${name}\nEmail: ${senderEmail}`;
+      const query = new URLSearchParams({ subject, body });
+      window.location.href = `mailto:nihalsahad02@gmail.com?${query.toString()}`;
+      document.getElementById("contact-status").textContent = "Your email app should open with the message ready to send.";
+    });
+
     const typedText = document.getElementById("typed-backdrop-text");
     const typingWords = ["AI / ML", "Python", "Data Science", "Deep Learning"];
     let typingIndex = 0;
@@ -779,7 +880,7 @@
     typeBackdrop();
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const networkScenes = ["network", "about-network"]
+    const networkScenes = ["network", "about-network", "contact-network"]
       .map((id) => {
         const canvas = document.getElementById(id);
         const context = canvas.getContext("2d");
